@@ -4,6 +4,7 @@ import { CartService } from './service/cart.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductCacheService } from './service/product-cache.service';
 import { ProductType } from './product/model/product.model';
+import { eventDetails } from '../../shared/event-details';
 
 @Component({
   selector: 'app-registration',
@@ -11,11 +12,13 @@ import { ProductType } from './product/model/product.model';
   styleUrls: ['./registration.component.scss']
 })
 export class RegistrationComponent {
+  readonly eventDetails = eventDetails;
   products: any[] = [];
   adultQuantity: number = 1;
   childQuantity: number = 1;
   loading = true;  // Track loading state
   cart: any;
+  cartNotice: string | null = null;
   private productsCache: any[] = []; // Cache for products
   filterValue: ProductType = 'nonbusiness'; // Default filter value, using ProductType
 
@@ -91,9 +94,21 @@ export class RegistrationComponent {
 
   // Add product to cart
   addToCart(product: any) {
-    this.cartService.addToCart(Object.assign({}, product));
+    const added = this.cartService.addToCart(Object.assign({}, product));
+    if (!added) {
+      return;
+    }
     this.cart = this.cartService.getCart();  // Update cart after adding product
     product.quantity = 0;
+  }
+
+  canAddToCart(product: any): boolean {
+    return !this.cartService.isChildEntryTicket(product) ||
+      this.cartService.hasAdultEntryTicket(this.cart || []);
+  }
+
+  isChildEntryTicket(product: any): boolean {
+    return this.cartService.isChildEntryTicket(product);
   }
 
   increaseQuantity(product: any) {
@@ -119,8 +134,11 @@ export class RegistrationComponent {
   }
 
   removeFromCart(productId: number) {
-    this.cartService.removeFromCart(productId);
+    const removedChildTicket = this.cartService.removeFromCart(productId);
     this.cart = this.cartService.getCart();  // Update cart after adding product
+    this.cartNotice = removedChildTicket
+      ? 'The child ticket was also removed because its parent ticket was removed.'
+      : null;
   }
 
   proceedToCheckout() {

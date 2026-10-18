@@ -7,14 +7,16 @@
       <!-- <img src="assets/shade.jpg" alt="Hero Shape Image" class="right-image"> -->
       <div class="text-overlay white-color-text">
         <div class="date">
-          <span>ನವೆಂಬರ್ 9, 2026</span>
+          <span>{{ eventDetails.celebrationMonth }} {{ eventDetails.celebrationDay }}, {{ eventDetails.year }}</span>
         </div>
         <div class="heading">
-          <span>ಶ್ರೀಗಂಧ ಯುಗಾದಿ - 2026</span>
+          <span>{{ eventDetails.eventHeading }} - {{ eventDetails.year }}</span>
         </div>
         <div class="location">
           <i class="fas fa-map-marker-alt"> </i>
-          <span style="padding-left: 5px;">Markant Theater - Uden</span>
+          <a [href]="eventDetails.venueMapUrl" target="_blank" rel="noopener noreferrer" style="padding-left: 5px; color: inherit;">
+            {{ eventDetails.venueAddress }}
+          </a>
         </div>
         <div class="book-now" (click)="navigateToRegister()">
           <span>Register Now</span>

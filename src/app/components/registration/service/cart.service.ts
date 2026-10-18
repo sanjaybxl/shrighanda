@@ -14,7 +14,14 @@ export class CartService {
     loadCart() {
         const savedCart = localStorage.getItem('cartItems');
         if (savedCart) {
-            this.cart = JSON.parse(savedCart);
+            const savedItems = JSON.parse(savedCart);
+            this.cart = savedItems.filter((item: any) => {
+                return !this.isChildEntryTicket(item.product) ||
+                    this.hasAdultEntryTicket(savedItems);
+            });
+            if (this.cart.length !== savedItems.length) {
+                this.saveCart();
+            }
         }
     }
 
@@ -22,8 +29,12 @@ export class CartService {
         localStorage.setItem('cartItems', JSON.stringify(this.cart));
     }
 
-    addToCart(product: any) {
+    addToCart(product: any): boolean {
         this.loadCart();
+        if (this.isChildEntryTicket(product) && !this.hasAdultEntryTicket(this.cart)) {
+            return false;
+        }
+
         // Check if the product already exists in the cart
         const existingProduct = this.cart.find((item: any) => item.product.id === product.id);
         console.log('existingProduct', existingProduct);
@@ -37,12 +48,40 @@ export class CartService {
 
         // Update the cart in localStorage
         localStorage.setItem('cartItems', JSON.stringify(this.cart));
+        return true;
     }
 
-    removeFromCart(productId: number) {
+    removeFromCart(productId: number): boolean {
         this.loadCart();
+        const removedParentTicket = this.cart.some((item: any) =>
+            item.product.id === productId && this.isAdultEntryTicket(item.product)
+        );
         this.cart = this.cart.filter((item: any) => item.product.id !== productId);
+        const removedChildTicket = removedParentTicket &&
+            this.cart.some((item: any) => this.isChildEntryTicket(item.product));
+        if (removedChildTicket) {
+            this.cart = this.cart.filter((item: any) => !this.isChildEntryTicket(item.product));
+        }
         this.saveCart();
+        return removedChildTicket;
+    }
+
+    isChildEntryTicket(product: any): boolean {
+        const name = this.normalizeProductName(product?.name);
+        return name.includes('kannada rajyotsava 2026 - entry ticket (0y-10y)');
+    }
+
+    hasAdultEntryTicket(items: any[] = this.cart): boolean {
+        return items.some((item: any) => this.isAdultEntryTicket(item.product));
+    }
+
+    private isAdultEntryTicket(product: any): boolean {
+        const name = this.normalizeProductName(product?.name);
+        return name.includes('kannada rajyotsava 2026 - entry (10y+)');
+    }
+
+    private normalizeProductName(name: unknown): string {
+        return typeof name === 'string' ? name.toLowerCase().replace(/^#+\s*/, '').trim() : '';
     }
 
     clearCart() {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { eventDetails } from '../shared/event-details';
 
 @Component({
   selector: 'app-banner',
@@ -7,6 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./banner.component.scss']
 })
 export class BannerComponent implements OnInit {
+  readonly eventDetails = eventDetails;
 
   constructor(private router: Router) {}
 

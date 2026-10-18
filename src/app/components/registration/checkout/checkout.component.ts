@@ -4,6 +4,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { PaymentService } from '../service/payment.service';
 import { environment } from 'src/environments/environment';
 import { style } from './checkout.constant';
+import { CartService } from '../service/cart.service';
 
 @Component({
   selector: 'app-checkout',
@@ -32,25 +33,22 @@ export class CheckoutComponent {
   paymentModeValid: boolean = false;
 
   constructor(private wcService: WooCommerceService,
-    private paymentService: PaymentService, private cdr: ChangeDetectorRef) { }
+    private paymentService: PaymentService, private cdr: ChangeDetectorRef,
+    private cartService: CartService) { }
 
   ngOnInit(): void {
     window.scrollTo(0, 0);
-    // Retrieve cart items from localStorage
-    const storedCart = localStorage.getItem('cartItems');
-    if (storedCart) {
-      this.cartItems = JSON.parse(storedCart);
-      this.cartItems = this.cartItems.filter((item) => {
-        const hasMatchingType = item.product.attributes?.some(
-          (attr: any) =>
-            attr.name.toLowerCase() === "product_type" &&
-            attr.options.some((option: string) => option.toLowerCase() === 'nonbusiness')
-        );
-        return hasMatchingType;
-      });
-      if (this.calculateCartTotal() > 0) {
-        this.initializeStripe();
-      }
+    // Retrieve the validated cart through CartService before checkout.
+    this.cartItems = this.cartService.getCart().filter((item) => {
+      const hasMatchingType = item.product.attributes?.some(
+        (attr: any) =>
+          attr.name.toLowerCase() === "product_type" &&
+          attr.options.some((option: string) => option.toLowerCase() === 'nonbusiness')
+      );
+      return hasMatchingType;
+    });
+    if (this.calculateCartTotal() > 0) {
+      this.initializeStripe();
     }
 
   }
@@ -166,5 +164,4 @@ export class CheckoutComponent {
 
   }
 }
-
 

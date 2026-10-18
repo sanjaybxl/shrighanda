@@ -14,9 +14,14 @@
         <!-- Title Card -->
         <div class="card mb-4" style="background: linear-gradient(180deg, #f7420d 0%, #ffcc00 50%, #f98110 100%);">
             <div class="card-header text-center">
-                <h2 class="mb-0" style="color: white;">ಶ್ರೀಗಂಧ ಯುಗಾದಿ - 2026</h2>
+                <h2 class="mb-0" style="color: white;">{{ eventDetails.eventHeading }} - {{ eventDetails.year }}</h2>
                 <div class="card-title" style="color: white; font-size: medium; padding-top: 5px;">Book your tickets
                     below</div>
+                <div class="card-title" style="color: white; font-size: medium; padding-top: 5px;">
+                    <a [href]="eventDetails.venueMapUrl" target="_blank" rel="noopener noreferrer" style="color: white; text-decoration: underline;">
+                        Venue: {{ eventDetails.venueAddress }}
+                    </a>
+                </div>
             </div>
         </div>
 
@@ -75,7 +80,7 @@
                         <div class="d-flex justify-content-center mb-3">
                             <button class="btn btn-primary btn-block" *ngIf="!product.sold_individually"
                                     (click)="addToCart(product)"
-                                    [disabled]="product.quantity <= 0">
+                                    [disabled]="product.quantity <= 0 || !canAddToCart(product)">
                                     Add to Cart
                             </button>
 
@@ -89,11 +94,16 @@
                         <p class="text-danger mt-1" *ngIf="(product.sold_individually && product.quantity > 1)">
                             Only one stall can be purchased at one time.
                         </p>
+                        <p class="text-danger mt-1" *ngIf="isChildEntryTicket(product) && !canAddToCart(product)">
+                            Add Kannada Rajyotsava 2026 - Entry (10y+) to the cart first.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
        
+        <div *ngIf="cartNotice" class="alert alert-info mt-3">{{ cartNotice }}</div>
+
         <div class="row mt-2" *ngIf="cart?.length">
             <div class="col">
 

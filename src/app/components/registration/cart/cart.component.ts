@@ -10,6 +10,7 @@ import { CartService } from '../service/cart.service';
 })
 export class CartComponent {
   cartItems: any[] = [];
+  cartNotice: string | null = null;
   filterValue: ProductType = 'nonbusiness'; // Default filter value
 
   constructor(
@@ -55,7 +56,10 @@ export class CartComponent {
   }
 
   removeFromCart(productId: number) {
-    this.cartService.removeFromCart(productId);
+    const removedChildTicket = this.cartService.removeFromCart(productId);
+    this.cartNotice = removedChildTicket
+      ? 'The child ticket was also removed because its parent ticket was removed.'
+      : null;
     // Refresh the cart items after removal
     this.cartItems = this.cartService.getCartItemsByType(this.filterValue);
   }
