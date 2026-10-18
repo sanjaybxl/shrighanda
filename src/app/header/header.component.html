@@ -3,7 +3,7 @@
   <div class="top-section">
     <div class="contact-info">
       <span>
-        <i class="fas fa-phone-alt" style="color: black;"></i><a href="tel:+31685238923"> +31 68523 8923</a>
+        <i class="fas fa-phone-alt" style="color: black;"></i><a href="tel:+31685238923"> +31 68249 2845</a>
         <i class="fas fa-envelope pr-1" style="color: black;"></i> <a
           href="mailto:info@shrigandha.nl">info&#64;shrigandha.nl</a>
       </span>
@@ -37,28 +37,28 @@
   </div>
 
   <section>
-    <input type="checkbox" id="check">
+    <input type="checkbox" id="check" [(ngModel)]="isMenuOpen" [ngModelOptions]="{ standalone: true }">
     <header>
-      <a href="#" class="logo" style="display: flex;">
+      <a routerLink="/home" class="brand" aria-label="Shrigandha Holland Kannada Association home" (click)="isMenuOpen = false">
         <img
           src="https://usercontent.one/wp/shrigandha.nl/wp-content/themes/shrighanda_new/angular-app/assets/Shrigandha-logo.png"
-          class="logo">
-        <!-- <a><img src="assets/site_logo.jpg" class="logo"></a> -->
-        <!-- <a><img src="assets/logo.jpg" class="logo"></a> -->
-        <div class="title">ಶ್ರೀಗಂಧ ಹಾಲೆಂಡ್ ಕನ್ನಡ ಬಳಗ</div>
-
+          class="brand__logo"
+          alt="">
+        <span class="brand__title">ಶ್ರೀಗಂಧ ಹಾಲೆಂಡ್ ಕನ್ನಡ ಬಳಗ</span>
       </a>
-      <div class="menu">
-        <a href="home">HOME</a>
-        <a href="about">ABOUT US</a>
-        <a href="events">EVENTS</a>
-        <a href="gallery">GALLERY</a>
-        <a href="contact-us">CONTACT</a>
+      <nav id="primary-navigation" class="menu" aria-label="Main navigation">
+        <a routerLink="/home" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }" (click)="isMenuOpen = false">Home</a>
+        <a routerLink="/about" routerLinkActive="is-active" (click)="isMenuOpen = false">About us</a>
+        <a routerLink="/events" routerLinkActive="is-active" (click)="isMenuOpen = false">Events</a>
+        <a routerLink="/gallery" routerLinkActive="is-active" (click)="isMenuOpen = false">Gallery</a>
+        <a routerLink="/contact-us" routerLinkActive="is-active" (click)="isMenuOpen = false">Contact</a>
+      </nav>
+      <div class="menu-toggle">
+        <label for="check" [attr.aria-expanded]="isMenuOpen" aria-controls="primary-navigation">
+          <span class="sr-only">{{ isMenuOpen ? 'Close navigation menu' : 'Open navigation menu' }}</span>
+          <i class="fas" [ngClass]="isMenuOpen ? 'fa-times' : 'fa-bars'" aria-hidden="true"></i>
+        </label>
       </div>
-      <label for="check">
-        <i class="fas fa-bars menu-btn"></i>
-        <i class="fas fa-times close-btn"></i>
-      </label>
     </header>
   </section>
 </section>

@@ -1,106 +1,217 @@
-.product-card {
-  border: 1px solid #ccc;
-  padding: 16px;
-  margin-bottom: 16px;
-  max-width: 300px;
-}
-
-.product-card img {
-  display: block;
-  margin-bottom: 10px;
-}
-
-.product-card h2 {
-  font-size: 18px;
-  margin: 0 0 10px 0;
-}
-
-.product-card p {
-  margin: 0;
-}
-
-.product-card a {
-  text-decoration: none;
-  color: blue;
-}
-
-.quantity-input {
-  width: 60px;
-  /* Set the desired width for the number input */
-  text-align: center;
-  /* Center the text inside the input */
-}
-
 .input-group-btn {
   display: flex;
   align-items: center;
-  /* Center the buttons vertically */
 }
 
-.logo {
-  height: 80px;
-  /* Logo height */
-  width: auto;
-  /* Maintain aspect ratio */
+.registration-page {
+  max-width: 76rem;
 }
 
-.event-container {
+.tickets-section {
+  padding-top: 0.5rem;
+}
+
+.tickets-heading {
+  margin: 0 0 1.5rem;
+  padding: 0.85rem 1rem;
+  color: #fff;
+  text-align: center;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  background: var(--kannada-red);
+  border-bottom: 0.35rem solid var(--kannada-yellow);
+  border-radius: 0.4rem;
+}
+
+.ticket-card {
+  overflow: hidden;
+  color: var(--kannada-ink);
+  background: #fff;
+  border: 1px solid var(--kannada-border);
+  border-top: 0.35rem solid var(--kannada-red);
+  border-radius: 0.75rem;
+  box-shadow: 0 0.3rem 1rem rgba(54, 27, 13, 0.08);
+  transition: transform 150ms ease, box-shadow 150ms ease;
+}
+
+.ticket-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0.65rem 1.4rem rgba(54, 27, 13, 0.13);
+}
+
+.ticket-card__image-wrap {
+  display: grid;
+  min-height: 9rem;
+  place-items: center;
+  padding: 0.85rem 1rem;
+  background: #fff8e2;
+  border-bottom: 1px solid var(--kannada-border);
+}
+
+.ticket-card__image {
+  display: block;
+  width: 100%;
+  height: 8rem;
+  object-fit: contain;
+}
+
+.ticket-card__body {
   display: flex;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  flex-wrap: wrap;
-  margin-bottom: 20px; /* Add space below the event container */
+  flex-direction: column;
+  align-items: stretch;
+  padding: 1.25rem;
 }
 
-/* Styling for the event image */
-.event-image {
-  flex: 1;
-  overflow: hidden;
-  min-width: 200px; /* Ensures the image section doesn't shrink too much */
+.ticket-card__title {
+  margin: 0 0 0.65rem;
+  color: var(--kannada-red-dark);
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.4;
 }
 
-.event-image img {
+.ticket-card__description {
+  margin: 0 0 0.75rem;
+  color: #5d5350;
+  line-height: 1.5;
+}
+
+.ticket-card__price {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: auto 0 1rem;
+  padding: 0.75rem 0;
+  color: #534641;
+  border-top: 1px solid #eee5d8;
+}
+
+.ticket-card__price strong {
+  color: var(--kannada-red-dark);
+  font-size: 1.1rem;
+}
+
+.ticket-card__quantity-label {
+  margin-bottom: 0.4rem;
+  color: #625653;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.ticket-card__quantity {
+  max-width: 13rem;
+  margin-bottom: 1rem;
+}
+
+.ticket-card__quantity-input {
+  height: 2.75rem;
+}
+
+.btn-quantity {
+  min-width: 2.75rem;
+  height: 2.75rem;
+  color: var(--kannada-red-dark);
+  background: #fff4cf;
+  border: 1px solid #e8d69b;
+  font-size: 1.1rem;
+  font-weight: 800;
+}
+
+.btn-quantity:hover,
+.btn-quantity:focus-visible {
+  color: #fff;
+  background: var(--kannada-red);
+}
+
+.ticket-card__actions {
+  display: flex;
+  margin-top: auto;
+}
+
+.btn-kannada-primary {
   width: 100%;
-  height: auto; /* Ensure the height adjusts based on the width */
-  object-fit: cover; /* Keep aspect ratio while covering */
 }
 
-/* Styling for the Google Maps iframe */
-.event-location {
-  flex: 1;
-  padding: 0; /* Remove padding to ensure full height */
-  min-width: 300px; /* Ensures the map section doesn't shrink too much */
-  display: flex; /* Allows the iframe to fill the height */
+.cart-total-button.cart-total-button--disabled:disabled {
+  color: #766b67;
+  background-color: #e8e3dc;
+  border-color: #e8e3dc;
+  cursor: not-allowed;
 }
 
-.event-location iframe {
-  width: 100%;
-  height: 100%; /* Set iframe height to 100% of its parent */
-  border: 0;
+.cart-total-button.active:not(:disabled) {
+  color: #fff;
+  background-color: var(--kannada-red);
+  background-image: none;
+  border-color: var(--kannada-red);
 }
 
+.ticket-card__add-button {
+  -webkit-appearance: none;
+  appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
 
-/* Media query for tablets and small screens */
-@media (max-width: 768px) {
-  .event-container {
-      flex-direction: column;
-  }
+.ticket-card__add-button:active {
+  color: #4e1015;
+  background-color: var(--kannada-yellow);
+  border-color: var(--kannada-yellow);
+  transform: scale(0.98);
+}
 
-  .event-location {
-      padding: 10px;
-      height: 200px; /* Set a specific height for smaller screens */
-  }
+.ticket-card__add-button.kannada-button--primary.ticket-card__add-button--added:disabled {
+  color: #fff;
+  -webkit-text-fill-color: #fff;
+  background-color: var(--kannada-red);
+  background-image: none;
+  border-color: var(--kannada-red);
+  opacity: 1;
+  cursor: default;
+  transform: none;
+}
+
+.ticket-card__notice {
+  margin: 0.85rem 0 0;
+  padding: 0.7rem 0.8rem;
+  color: #68131a;
+  background: #fff2c8;
+  border-left: 0.2rem solid #c41424;
+  border-radius: 0.25rem;
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
+
+.cart-notice {
+  color: #68131a;
+  background: #fff2c8;
+  border-color: #e8d69b;
+}
+
+.cart-summary {
+  border: 1px solid var(--kannada-border);
+  border-top: 0.35rem solid var(--kannada-red);
+  border-radius: 0.75rem;
+}
+
+.cart-summary__title {
+  margin: 0 0 1rem;
+  color: var(--kannada-red-dark);
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.cart-table thead {
+  color: #fff;
+  background: var(--kannada-red-dark);
+}
+
+.cart-table th {
+  color: inherit;
 }
 
 /* Media query for mobile phones */
 @media (max-width: 480px) {
-  .event-image img {
-      // height: 400px; /* Adjust image height for small screens */
-      // object-fit: contain; /* Keep aspect ratio while covering */
-  }
-  
   h1 {
     font-size: 32px;
   }
@@ -109,23 +220,19 @@
     font-size: 22px;
   }
 
-  .event-location iframe {
-      height: 100%; /* Full height of the parent */
-      width: fit-content;
+  .btn-trash {
+    width: 2.5rem;
   }
 
-  button {
+  .ticket-card__quantity {
+    max-width: none;
+  }
+
+  .ticket-card__actions,
+  .ticket-card__actions .btn-kannada-primary,
+  .cart-total-button {
     width: 100%;
   }
-
-  .btn-trash {
-    width: 30px;
-  }
-}
-
-/* Global styles to reduce section height */
-section {
-  padding: 20px 0; /* Adjust top and bottom padding as needed */
 }
 
 img {
@@ -143,10 +250,6 @@ img {
   th {
     font-weight: bold;
     color: white;
-  }
-
-  .thead-dark {
-    background-color: #343a40; // Dark background for header
   }
 
   .hover-row {

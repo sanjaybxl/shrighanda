@@ -11,6 +11,7 @@ import { CartService } from '../components/registration/service/cart.service';
   providers: [HeaderService]
 })
 export class HeaderComponent implements OnInit {
+  isMenuOpen = false;
 
   title = 'THEME';
   menu: any;

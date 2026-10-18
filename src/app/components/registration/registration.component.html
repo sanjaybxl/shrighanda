@@ -1,119 +1,90 @@
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-12 text-center">
-            <h1 class="display-4 mb-3" style="color:chocolate;">Kannada Events</h1>
-            <p class="lead text-muted mb-2">
-                Join us for a series of exciting Kannada events that celebrate our rich culture and heritage. From
-                cultural programs to festivals, immerse yourself in the vibrancy of Karnataka and connect with our
-                community!
-            </p>
-        </div>
-    </div>
+<main class="container my-5 registration-page">
+    <app-event-poster [event]="eventDetails"></app-event-poster>
 
-    <div class="container my-4">
-        <!-- Title Card -->
-        <div class="card mb-4" style="background: linear-gradient(180deg, #f7420d 0%, #ffcc00 50%, #f98110 100%);">
-            <div class="card-header text-center">
-                <h2 class="mb-0" style="color: white;">{{ eventDetails.eventHeading }} - {{ eventDetails.year }}</h2>
-                <div class="card-title" style="color: white; font-size: medium; padding-top: 5px;">Book your tickets
-                    below</div>
-                <div class="card-title" style="color: white; font-size: medium; padding-top: 5px;">
-                    <a [href]="eventDetails.venueMapUrl" target="_blank" rel="noopener noreferrer" style="color: white; text-decoration: underline;">
-                        Venue: {{ eventDetails.venueAddress }}
-                    </a>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="event-container">
-            <!-- Left column for the image -->
-            <div class="event-image">
-                <img src="https://usercontent.one/wp/shrigandha.nl/wp-content/themes/shrighanda_new/angular-app/assets/events/2026/ugadi/cultural.png" alt="Event Image">
-            </div>
-
-            <!-- Right column for the Google Maps iframe -->
-            <div class="event-image">
-                <img src="https://usercontent.one/wp/shrigandha.nl/wp-content/themes/shrighanda_new/angular-app/assets/events/2026/ugadi/poster.png" alt="Event Image">
-
-            </div>
-        </div>
-
-        <div class="card mb-4" style="background: linear-gradient(180deg, #f7420d 0%, #ffcc00 50%, #f98110 100%);">
-            <div class="card-header text-center">
-                <h2 class="mb-0" style="color:white;">Tickets</h2>
-            </div>
-        </div>
+    <section class="tickets-section" aria-labelledby="tickets-heading">
+        <h2 id="tickets-heading" class="tickets-heading">Choose your tickets</h2>
 
         <app-loading-modal [isLoading]="loading"></app-loading-modal>
 
         <div class="row justify-content-center">
             <!-- Loop through the products -->
-            <div class="col-md-4 col-sm-2 mb-4" *ngFor="let product of products">
-                <div class="card h-100 text-center">
-                    <!-- Product Image -->
-                    <img class="card-img-top img-fluid" [src]="product.images[0]?.src" alt="{{ product.name }}">
+            <div class="col-12 col-md-6 col-xl-4 mb-4" *ngFor="let product of products">
+                <article class="card ticket-card h-100">
+                    <div class="ticket-card__image-wrap">
+                        <img class="ticket-card__image" [src]="product.images[0]?.src" alt="">
+                    </div>
 
-                    <!-- Card Body with Product Details -->
-                    <div class="card-body">
-                        <h5 class="card-title">{{ product.name }}</h5>
+                    <div class="card-body ticket-card__body">
+                        <h3 class="ticket-card__title">{{ product.name }}</h3>
+                        <p class="ticket-card__description" [innerHTML]="product.description"></p>
 
-                        <!-- Product Description -->
-                        <p class="card-text" [innerHTML]="product.description"></p>
+                        <div class="ticket-card__price">
+                            <span>Price</span>
+                            <strong [innerHTML]="product.price_html"></strong>
+                        </div>
 
-                        <!-- Product Price -->
-                        <p><strong>Price:</strong> <span [innerHTML]="product.price_html"></span></p>
-
-                        <!-- Quantity Selector -->
-                        <div class="input-group mb-3">
+                        <label class="ticket-card__quantity-label" [for]="'quantity-' + product.id">Quantity</label>
+                        <div class="input-group ticket-card__quantity">
                             <span class="input-group-btn">
-                                <button class="btn btn-outline-secondary" (click)="decreaseQuantity(product)">-</button>
+                                <button type="button" class="btn btn-quantity" (click)="decreaseQuantity(product)"
+                                    [attr.aria-label]="'Decrease quantity for ' + product.name">−</button>
                             </span>
-                            <input type="number" class="form-control text-center" [(ngModel)]="product.quantity"
-                                [min]="0" [max]="product.sold_individually ? 1 : 10" style="width: 60px; height: 38px;" />
+                            <input type="number" class="form-control text-center ticket-card__quantity-input"
+                                [id]="'quantity-' + product.id" [(ngModel)]="product.quantity"
+                                [min]="0" [max]="product.sold_individually ? 1 : 10"
+                                [attr.aria-label]="'Quantity for ' + product.name" />
                             <span class="input-group-btn">
-                                <button class="btn btn-outline-secondary" (click)="increaseQuantity(product)">+</button>
+                                <button type="button" class="btn btn-quantity" (click)="increaseQuantity(product)"
+                                    [attr.aria-label]="'Increase quantity for ' + product.name">+</button>
                             </span>
                         </div>
 
-                        <!-- Add to Cart Button -->
-                        <div class="d-flex justify-content-center mb-3">
-                            <button class="btn btn-primary btn-block" *ngIf="!product.sold_individually"
+                        <div class="ticket-card__actions">
+                            <button type="button" class="btn kannada-button kannada-button--primary btn-kannada-primary ticket-card__add-button"
+                                    *ngIf="!product.sold_individually"
+                                    [class.active]="product.quantity > 0 && canAddToCart(product)"
+                                    [class.ticket-card__add-button--added]="isProductAdded(product) && product.quantity <= 0"
+                                    [attr.aria-pressed]="isProductAdded(product)"
                                     (click)="addToCart(product)"
                                     [disabled]="product.quantity <= 0 || !canAddToCart(product)">
-                                    Add to Cart
+                                    {{ isProductAdded(product) && product.quantity <= 0 ? 'Added to Cart' : 'Add to Cart' }}
                             </button>
 
-                            <button class="btn btn-primary btn-block" *ngIf="product.sold_individually"
+                            <button type="button" class="btn kannada-button kannada-button--primary btn-kannada-primary ticket-card__add-button"
+                                    *ngIf="product.sold_individually"
+                                    [class.active]="product.quantity === 1 && getCartCount() === 0"
+                                    [class.ticket-card__add-button--added]="isProductAdded(product)"
+                                    [attr.aria-pressed]="isProductAdded(product)"
                                     (click)="addToCart(product)"
                                     [disabled]="(product.quantity > 1 || getCartCount() === 1) || product.quantity === 0">
-                                    Add Stall to Cart
+                                    {{ isProductAdded(product) ? 'Added to Cart' : 'Add Stall to Cart' }}
                             </button>
-
                         </div>
-                        <p class="text-danger mt-1" *ngIf="(product.sold_individually && product.quantity > 1)">
+
+                        <p class="ticket-card__notice" *ngIf="product.sold_individually && product.quantity > 1">
                             Only one stall can be purchased at one time.
                         </p>
-                        <p class="text-danger mt-1" *ngIf="isChildEntryTicket(product) && !canAddToCart(product)">
+                        <p class="ticket-card__notice" *ngIf="isChildEntryTicket(product) && !canAddToCart(product)" role="status">
                             Add Kannada Rajyotsava 2026 - Entry (10y+) to the cart first.
                         </p>
                     </div>
-                </div>
+                </article>
             </div>
         </div>
        
-        <div *ngIf="cartNotice" class="alert alert-info mt-3">{{ cartNotice }}</div>
+        <div *ngIf="cartNotice" class="alert cart-notice mt-3" role="status">{{ cartNotice }}</div>
 
         <div class="row mt-2" *ngIf="cart?.length">
             <div class="col">
 
                 <!-- Card container -->
-                <div class="card shadow-sm">
-                    <div class="card-body text-center">
-                        <h4 class="mb-1" style="color: #333;">Cart Summary</h4>
+                <div class="card cart-summary shadow-sm">
+                    <div class="card-body">
+                        <h2 class="cart-summary__title">Cart Summary</h2>
 
                         <!-- Table to display cart items -->
-                        <table class="table table-hover">
+                        <div class="table-responsive">
+                            <table class="table table-hover cart-table">
                             <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">Product</th>
@@ -143,7 +114,8 @@
                                     </td>
                                 </tr>
                             </tbody>
-                        </table>
+                            </table>
+                        </div>
                         <p class="text-danger mt-1" *ngIf="filterValue === 'business' && getCartCount() > 0">
                             Cart full - only one stall is allowed to add to the cart at one time
                         </p>
@@ -154,12 +126,17 @@
         <div class="row justify-content-center mt-4">
             <div>
                 <h4 class="text-primary font-weight-bold mb-3 text-center">Total: &euro;{{ calculateCartTotal() }}</h4>
-                <button class="btn btn-success cart-total-button" (click)="proceedToCheckout()"
-                    [disabled]="getCartCount() == 0">
+                <button class="btn kannada-button kannada-button--primary btn-kannada-primary cart-total-button"
+                    [ngClass]="{
+                        'active': getCartCount() > 0,
+                        'cart-total-button--disabled': getCartCount() === 0
+                    }"
+                    (click)="proceedToCheckout()"
+                    [disabled]="getCartCount() === 0">
                     <i class="fas fa-shopping-cart"></i> Proceed to Checkout
                 </button>
             </div>
 
         </div>
-    </div>
-</div>
+    </section>
+</main>

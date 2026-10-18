@@ -1,61 +1,75 @@
-<button class="m-4 back-button" onclick="window.history.back();">Go Back</button>
+<main class="cart-page container">
+  <button class="cart-back-button" onclick="window.history.back();">
+    <span aria-hidden="true">&larr;</span> Go Back
+  </button>
 
-<div class="container mt-1">
-  <div class="row mt-4 mb-4 cart-header">
-    <div class="col-12 text-center">
-      <h1 class="cart-header-title">Your Shopping Cart</h1>
-      <p class="cart-summary">You have selected the following items. Review your choices before proceeding to checkout.
-      </p>
-    </div>
+  <header class="cart-page__header">
+    <span class="cart-page__eyebrow">Your event selection</span>
+    <h1>Your Shopping Cart</h1>
+    <p>Review your tickets before continuing to checkout.</p>
+  </header>
+
+  <div *ngIf="cartNotice" class="cart-page__notice" role="status">
+    <i class="fas fa-info-circle" aria-hidden="true"></i>
+    {{ cartNotice }}
   </div>
 
-  <div class="row justify-content-center">
-    <div *ngIf="cartNotice" class="col-12">
-      <div class="alert alert-info text-center">{{ cartNotice }}</div>
-    </div>
+  <section *ngIf="getGroupedCartItems().length === 0" class="cart-empty" aria-labelledby="cart-empty-heading">
+    <span class="cart-empty__icon" aria-hidden="true"><i class="fas fa-shopping-basket"></i></span>
+    <h2 id="cart-empty-heading">Your cart is empty</h2>
+    <p>Choose your event tickets and they’ll appear here.</p>
+    <button type="button" class="kannada-button kannada-button--primary" (click)="proceedToEvents()">
+      <i class="fas fa-arrow-left" aria-hidden="true"></i> Browse Events
+    </button>
+  </section>
 
-    <!-- Check if cart is empty -->
-    <div *ngIf="getGroupedCartItems().length === 0" class="col-12">
-      <p class="text-center">Your cart is empty.</p>
-    </div>
+  <div class="cart-layout" *ngIf="getGroupedCartItems().length > 0">
+    <section class="cart-items" aria-labelledby="cart-items-heading">
+      <h2 id="cart-items-heading" class="cart-items__heading">
+        Selected tickets <span>{{ getGroupedCartItems().length }}</span>
+      </h2>
 
-    <!-- Loop through grouped cart items -->
-    <div class="col-md-4 col-sm-6 mb-4" *ngFor="let item of getGroupedCartItems()">
-      <div class="card h-100 shadow-sm">
-        <img class="card-img-top img-fluid" [src]="item.product.images[0]?.src" alt="{{ item.product.name }}" />
-        <div class="card-body">
-          <h5 class="card-title text-primary font-weight-bold">{{ item.product.name }}</h5>
-          <p><strong>Price:</strong> <span [innerHTML]="item.product.price_html"></span></p>
-          <p><strong>Quantity:</strong> {{ item.quantity }}</p>
-          <p><strong>Total:</strong> &euro;{{ calculateItemTotal(item) }}</p>
-          <button class="btn btn-danger btn-block" (click)="removeFromCart(item.product.id)">
-            <i class="fas fa-trash-alt"></i> Remove from Cart
-          </button>
+      <article class="cart-item" *ngFor="let item of getGroupedCartItems()">
+        <div class="cart-item__image-wrap">
+          <img class="cart-item__image" [src]="item.product.images[0]?.src" [alt]="item.product.name" />
         </div>
+
+        <div class="cart-item__details">
+          <h3>{{ item.product.name }}</h3>
+          <div class="cart-item__meta">
+            <span><strong>Unit price</strong> <span [innerHTML]="item.product.price_html"></span></span>
+            <span><strong>Quantity</strong> {{ item.quantity }}</span>
+          </div>
+        </div>
+
+        <div class="cart-item__amount">
+          <span>Item total</span>
+          <strong>&euro;{{ calculateItemTotal(item) }}</strong>
+        </div>
+
+        <button type="button" class="cart-item__remove" (click)="removeFromCart(item.product.id)"
+          [attr.aria-label]="'Remove ' + item.product.name + ' from cart'">
+          <i class="fas fa-trash-alt" aria-hidden="true"></i>
+          <span>Remove</span>
+        </button>
+      </article>
+    </section>
+
+    <aside class="cart-total-card" aria-labelledby="cart-total-heading">
+      <span class="cart-page__eyebrow">Ready when you are</span>
+      <h2 id="cart-total-heading">Cart total</h2>
+      <div class="cart-total-card__amount">
+        <span>Total</span>
+        <strong>&euro;{{ calculateCartTotal() }}</strong>
       </div>
-    </div>
-
+      <p>Review your details on the next step before completing your registration.</p>
+      <button type="button" class="kannada-button kannada-button--primary cart-total-button"
+        (click)="proceedToCheckout()" [disabled]="cartItems.length == 0">
+        Continue to Checkout <i class="fas fa-arrow-right" aria-hidden="true"></i>
+      </button>
+      <button type="button" class="cart-total-card__continue" (click)="proceedToEvents()">
+        <i class="fas fa-arrow-left" aria-hidden="true"></i> Continue browsing events
+      </button>
+    </aside>
   </div>
-
-  <!-- Total Cart Summary -->
-  <div class="row mt-4 mb-4">
-    <div class="col-12 text-right">
-      <div class="d-flex justify-content-between cart-total-background p-4 rounded shadow-lg align-items-end">
-        <div>
-          <h4 class="text-primary font-weight-bold mb-3"></h4>
-          <button class="btn btn-success" (click)="proceedToEvents()">
-            <i class="fa fa-arrow-left"></i> Events
-          </button>
-        </div>
-        <div>
-          <h4 class="text-primary font-weight-bold mb-3">Total: &euro;{{ calculateCartTotal() }}</h4>
-          <button class="btn btn-success cart-total-button" (click)="proceedToCheckout()"
-            [disabled]="cartItems.length == 0">
-            <i class="fas fa-shopping-cart"></i> Proceed to Checkout
-          </button>
-        </div>
-      </div>
-    </div>
-
-
-  </div>
+</main>

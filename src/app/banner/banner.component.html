@@ -1,30 +1,49 @@
-<div class="banner-content">
-  <div class="image-container">
-    <img src="https://usercontent.one/wp/shrigandha.nl/wp-content/themes/shrighanda_new/angular-app/assets/document.jpg" alt="Document Image" class="full-width-image">
-    <!-- <img src="assets/document.jpg" alt="Document Image" class="full-width-image"> -->
-    <div class="overlay-image">
-      <img src="https://usercontent.one/wp/shrigandha.nl/wp-content/themes/shrighanda_new/angular-app/assets/shade.jpg" alt="Hero Shape Image" class="right-image">
-      <!-- <img src="assets/shade.jpg" alt="Hero Shape Image" class="right-image"> -->
-      <div class="text-overlay white-color-text">
-        <div class="date">
-          <span>{{ eventDetails.celebrationMonth }} {{ eventDetails.celebrationDay }}, {{ eventDetails.year }}</span>
-        </div>
-        <div class="heading">
-          <span>{{ eventDetails.eventHeading }} - {{ eventDetails.year }}</span>
-        </div>
-        <div class="location">
-          <i class="fas fa-map-marker-alt"> </i>
-          <a [href]="eventDetails.venueMapUrl" target="_blank" rel="noopener noreferrer" style="padding-left: 5px; color: inherit;">
-            {{ eventDetails.venueAddress }}
-          </a>
-        </div>
-        <div class="book-now" (click)="navigateToRegister()">
-          <span>Register Now</span>
-        </div>
-        <div style="margin-top: 1rem;" class="book-now" (click)="navigateToRegisterStalls()">
-          <span>Stall Registration</span>
-        </div>
-      </div>
+<section class="event-hero" aria-labelledby="event-hero-title">
+  <div class="event-hero__backdrop" aria-hidden="true"></div>
+
+  <div class="event-hero__content">
+    <p class="event-hero__eyebrow">ಶ್ರೀಗಂಧ • ಕನ್ನಡ ಸಂಭ್ರಮ</p>
+    <p class="event-hero__date">
+      {{ eventDetails.celebrationMonth }} {{ eventDetails.celebrationDay }}, {{ eventDetails.year }}
+    </p>
+
+    <h1 id="event-hero-title" class="event-hero__title">
+      <span class="event-hero__title-text">{{ eventDetails.eventHeading }}</span>
+      <span class="event-hero__year">{{ eventDetails.year }}</span>
+    </h1>
+
+    <p class="event-hero__description">
+      Join our community for a celebration of Kannada culture, performances, and togetherness.
+    </p>
+
+    <a
+      class="event-hero__venue"
+      [href]="eventDetails.venueMapUrl"
+      target="_blank"
+      rel="noopener noreferrer">
+      <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+      <span>{{ eventDetails.venueAddress }}</span>
+      <span class="event-hero__map-label">View map</span>
+    </a>
+
+    <div class="event-hero__actions">
+      <button
+        type="button"
+        class="kannada-button kannada-button--gold event-hero__button"
+        (click)="navigateToRegister()"
+        aria-label="Book tickets for the event">
+        Book tickets
+        <span aria-hidden="true">→</span>
+      </button>
+      <button
+        type="button"
+        class="kannada-button kannada-button--outline event-hero__button"
+        (click)="navigateToRegisterStalls()"
+        aria-label="Register a stall for the event">
+        Register a stall
+      </button>
     </div>
   </div>
-</div>
+
+  <div class="event-hero__flag-stripe" aria-hidden="true"></div>
+</section>

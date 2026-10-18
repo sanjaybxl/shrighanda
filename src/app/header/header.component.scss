@@ -1,288 +1,309 @@
-/* Top section styles */
+:host {
+  display: block;
+  position: relative;
+  z-index: 20;
+}
+
 .top-section {
-  background: linear-gradient(180deg, #f7420d 0%, #ffcc00 50%, #f98110 100%);
-  color: white;
   display: flex;
-  justify-content: space-between;
-  padding: 10px 20px;
-  font-size: 14px;
   align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.55rem clamp(1rem, 4vw, 3rem);
+  color: #fff;
+  background: linear-gradient(100deg, #a90e1a 0%, #c41627 58%, #edb827 100%);
+  font-size: 0.88rem;
 }
 
 .contact-info {
-  flex: 1;
+  min-width: 0;
+}
+
+.contact-info > span {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 1rem;
+}
+
+.contact-info a,
+.social-media a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.contact-info a:hover,
+.social-media a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
 
 .social-media {
-  flex: 1;
-  text-align: right;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  white-space: nowrap;
 }
 
 .social-media span {
-  margin-right: 0px;
+  margin: 0;
 }
 
 .social-media a {
-  margin-left: 10px;
-  color: white;
-  font-size: 14px;
-}
-
-.social-media a:hover {
-  color: #f7420d;
-}
-
-span i {
-  margin-left: 10px;
-  /* Space between icon and text */
-  color: white;
-  /* Icon color */
-}
-
-/* Header styles */
-header {
-  position: relative;
-  width: 100%;
-  height: 100px;
-  /* Height for the header */
-  padding: 0 20px;
-  /* Horizontal padding */
-  display: flex;
-  justify-content: flex-start;
-  /* Align items to the left */
-  align-items: center;
-  /* Center items vertically */
-}
-
-header .logo {
-  height: 80px;
-  /* Logo height */
-  width: auto;
-  /* Maintain aspect ratio */
-}
-
-header .title {
-  font-size: 34px;
-  /* Title font size */
-  color: #000;
-  /* Title color */
-  margin-left: 0;
-  /* No margin for closer alignment */
-  padding-left: 5px;
-  /* Optional: Add a little padding for spacing */
-  font-weight: bold;
-  align-self: center;
-}
-
-header .menu {
-  display: flex;
-  align-items: center;
-  /* Align menu items vertically */
-  margin-left: auto;
-  /* Push the menu to the right */
-}
-
-header .menu a {
-  color: #000;
-  text-decoration: none;
-  font-weight: 500;
-  border-radius: 20px;
-  transition: 0.3s;
-}
-
-header .menu a:not(:last-child) {
-  margin-right: 30px;
-  /* Space between menu items */
-}
-
-header .menu a:hover {
-  padding: 10px;
-  background: linear-gradient(180deg, #f7420d 0%, #ffcc00 50%, #f98110 100%);
-  color: white;
-  /* Change text color for contrast */
-  transition: background 0.3s ease;
-  /* Smooth transition */
-}
-
-/* Responsive styles */
-label {
-  display: none;
-}
-
-#check {
-  z-index: 3;
-  display: none;
-}
-
-@media (max-width: 960px) {
-  .top-section {
-    flex-direction: column;
-    align-items: center;
-    font-size: 12px;
-    padding: 10px;
-    text-align: center;
-  }
-
-  .social-media {
-    margin-top: 10px;
-  }
-
-  header {
-    height: 100px;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  header .logo {
-    height: 60px;
-    /* Smaller logo size */
-    padding-left: 15px;
-  }
-
-  header .title {
-    font-size: 30px;
-    /* Reduce title size on smaller screens */
-    text-align: center;
-    margin-left: 0;
-    padding-left: 80px;
-  }
-
-  header .menu {
-    display: none;
-    /* Hide menu on smaller screens */
-  }
-
-  label {
-    display: block;
-    font-size: 25px;
-    cursor: pointer;
-    transition: 0.3s;
-    transition-property: color;
-  }
-
-  label:hover {
-    color: #fff;
-  }
-
-  label .close-btn {
-    display: none;
-  }
-
-  #check:checked~header .menu {
-    z-index: 2;
-    position: fixed;
-    background: rgba(229, 246, 223, 0.9);
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    list-style: none;
-    margin-bottom: 5px;
-    margin-top: -200px
-  }
-
-  #check:checked~header .menu a {
-    font-weight: 700;
-    margin-right: 0;
-    margin-bottom: 50px;
-    letter-spacing: 10px;
-  }
-
-  #check:checked~header label .menu-btn {
-    display: none;
-  }
-
-  #check:checked~header label .close-btn {
-    z-index: 2;
-    display: block;
-    position: fixed;
-    color: black;
-  }
-
-  label .menu-btn {
-    position: absolute;
-  }
-
-  header .logo {
-    position: absolute;
-  }
-}
-
-/* Mobile adjustments */
-@media (max-width: 600px) {
-  .top-section {
-    align-items: center;
-    font-size: 10px;
-    padding: 5px;
-  }
-
-  header {
-    height: 60px;
-    padding: 10px;
-  }
-
-  header .logo {
-    height: 30px;
-    /* Even smaller logo for mobile */
-    padding-left: 15px;
-  }
-
-  header .title {
-    font-size: 18px;
-    /* Smaller title on mobile */
-    padding-left: 50px;
-  }
-
-  .header .logo {
-    position: absolute;
-    height: 30px;
-    padding-left: 10px;
-  }
-
-  #check:checked~header .menu a {
-    font-size: 14px;
-    letter-spacing: normal;
-  }
+  font-size: 1rem;
 }
 
 .cart-icon {
-  cursor: pointer;
-  margin-left: 15px;
-}
-
-.cart-icon a {
-  color: #fff;
-  /* Icon color */
-  text-decoration: none;
-  /* Remove underline */
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.5rem;
+  margin-left: 0.4rem;
 }
 
 .cart-icon .badge {
   position: absolute;
-  top: -12px;
-  right: -20px;
-  border-radius: 50%;
-  padding: 2px 6px;
-  font-size: 12px;
-  background-color: #ffcc00;
-  /* Adjust as needed */
-  color: #333;
-  /* Text color */
+  top: -0.7rem;
+  right: -0.8rem;
+  padding: 0.15rem 0.35rem;
+  color: #4c1013;
+  background: #ffdf61;
+  border-radius: 999px;
+  font-size: 0.7rem;
+}
+
+#check {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
 }
 
 header {
-  background-color: #fff;
-  /* Change to your desired background color */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  /* Adjust values for shadow effect */
-  padding: 10px 20px;
-  /* Optional padding for better spacing */
   position: relative;
-  /* Optional: helps in positioning if needed */
-  z-index: 10;
-  /* Optional: makes sure header stays above other elements */
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  min-height: 5.25rem;
+  padding: 0.65rem clamp(1rem, 4vw, 3rem);
+  background: #fffdf7;
+  box-shadow: 0 0.2rem 1rem rgba(57, 21, 17, 0.12);
+}
+
+.brand {
+  display: inline-flex;
+  flex: 0 1 auto;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+  color: #491116;
+  text-decoration: none;
+}
+
+.brand__logo {
+  display: block;
+  width: 3.6rem;
+  height: 3.6rem;
+  object-fit: contain;
+}
+
+.brand__title {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: clamp(1.05rem, 1.8vw, 1.45rem);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: clamp(0.25rem, 1.5vw, 1.25rem);
+  margin-left: auto;
+}
+
+.menu a {
+  position: relative;
+  padding: 0.65rem 0.75rem;
+  color: #3e3030;
+  font-size: 0.94rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 0.35rem;
+  transition: color 150ms ease, background-color 150ms ease;
+}
+
+.menu a:hover,
+.menu a:focus-visible,
+.menu a.is-active {
+  color: #a90e1a;
+  background: #fff0bd;
+}
+
+.menu a.is-active::after {
+  position: absolute;
+  right: 0.75rem;
+  bottom: 0.25rem;
+  left: 0.75rem;
+  height: 0.15rem;
+  background: #c41627;
+  border-radius: 999px;
+  content: '';
+}
+
+.menu-toggle {
+  display: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 960px) {
+  .top-section {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  header {
+    min-height: 4.5rem;
+  }
+
+  .brand__logo {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .menu {
+    gap: 0;
+  }
+
+  .menu a {
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .top-section {
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 0.6rem 0.75rem;
+    font-size: 0.78rem;
+  }
+
+  .contact-info > span,
+  .social-media {
+    justify-content: center;
+  }
+
+  header {
+    justify-content: space-between;
+    min-height: 4.25rem;
+    padding: 0.55rem 1rem;
+  }
+
+  .brand__logo {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .brand__title {
+    font-size: clamp(0.78rem, 2.8vw, 1rem);
+  }
+
+  .menu-toggle {
+    display: block;
+    order: 2;
+  }
+
+  .menu-toggle label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin: 0;
+    color: #8c111c;
+    font-size: 1.35rem;
+    cursor: pointer;
+    background: #fff0bd;
+    border-radius: 50%;
+  }
+
+  .menu {
+    position: absolute;
+    z-index: 3;
+    top: calc(100% + 0.35rem);
+    right: 0.75rem;
+    left: 0.75rem;
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.25rem;
+    padding: 0.65rem;
+    background: #fffdf7;
+    border: 1px solid #eadfca;
+    border-radius: 0.65rem;
+    box-shadow: 0 0.75rem 1.75rem rgba(49, 20, 16, 0.18);
+  }
+
+  #check:checked ~ header .menu {
+    display: flex;
+  }
+
+  .menu a {
+    padding: 0.85rem 1rem;
+    font-size: 1rem;
+  }
+
+  .menu a.is-active::after {
+    right: auto;
+    bottom: 0.45rem;
+    left: 0.35rem;
+    width: 0.15rem;
+    height: calc(100% - 0.9rem);
+  }
+}
+
+@media (max-width: 420px) {
+  .contact-info > span {
+    column-gap: 0.5rem;
+  }
+
+  .brand__title {
+    font-size: clamp(0.68rem, 3.2vw, 0.82rem);
+  }
+
+  .brand {
+    gap: 0.45rem;
+  }
+
+  .brand__logo {
+    width: 2.3rem;
+    height: 2.3rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu a {
+    transition: none;
+  }
 }

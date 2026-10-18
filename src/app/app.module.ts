@@ -23,6 +23,7 @@ import { FeedbackFormComponent } from './components/feedback-form/feedback-form.
 import { LoadingModalComponent } from './shared/loading-modal/loading-modal.component';
 import { MediaUploadComponent } from './components/cultural-programs-media-upload/media-upload.component';
 import { LogoScrollComponent } from './components/logo-scroll/logo-scroll.component';
+import { EventPosterComponent } from './shared/event-poster/event-poster.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { LogoScrollComponent } from './components/logo-scroll/logo-scroll.compon
     FeedbackFormComponent,
     LoadingModalComponent,
     MediaUploadComponent,
-    LogoScrollComponent
+    LogoScrollComponent,
+    EventPosterComponent
   ],
   imports: [
     BrowserModule,

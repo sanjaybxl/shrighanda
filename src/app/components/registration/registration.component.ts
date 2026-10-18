@@ -102,6 +102,10 @@ export class RegistrationComponent {
     product.quantity = 0;
   }
 
+  isProductAdded(product: any): boolean {
+    return this.cart.some((item: any) => item.product.id === product.id);
+  }
+
   canAddToCart(product: any): boolean {
     return !this.cartService.isChildEntryTicket(product) ||
       this.cartService.hasAdultEntryTicket(this.cart || []);
@@ -134,8 +138,19 @@ export class RegistrationComponent {
   }
 
   removeFromCart(productId: number) {
+    const previousProductIds = this.cartService.getCart().map((item: any) => item.product.id);
     const removedChildTicket = this.cartService.removeFromCart(productId);
-    this.cart = this.cartService.getCart();  // Update cart after adding product
+    this.cart = this.cartService.getCart();
+
+    const removedProductIds = previousProductIds.filter(
+      id => !this.cart.some((item: any) => item.product.id === id)
+    );
+    this.products.forEach(product => {
+      if (removedProductIds.includes(product.id)) {
+        product.quantity = Math.max(product.quantity || 0, 1);
+      }
+    });
+
     this.cartNotice = removedChildTicket
       ? 'The child ticket was also removed because its parent ticket was removed.'
       : null;

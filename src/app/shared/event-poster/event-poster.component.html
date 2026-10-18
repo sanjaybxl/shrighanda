@@ -1,0 +1,46 @@
+<article class="event-showcase">
+  <header class="event-showcase__header">
+    <span class="event-showcase__eyebrow">ಶ್ರೀಗಂಧ • ಕನ್ನಡ ಸಂಭ್ರಮ</span>
+    <h2>{{ event.eventHeading }} <span class="event-showcase__year">{{ event.year }}</span></h2>
+  </header>
+
+  <div class="event-showcase__body">
+    <div class="event-showcase__details">
+      <p class="event-showcase__intro">Celebrate Kannada culture with our community.</p>
+
+      <div class="event-showcase__detail">
+        <span class="event-showcase__label">Date</span>
+        <span>{{ event.celebrationMonth }} {{ event.celebrationDay }}, {{ event.year }}</span>
+      </div>
+
+      <div class="event-showcase__detail">
+        <span class="event-showcase__label">Venue</span>
+        <a [href]="event.venueMapUrl" target="_blank" rel="noopener noreferrer">
+          {{ event.venueAddress }}
+          <span class="event-showcase__map-hint">View map</span>
+        </a>
+      </div>
+
+      <a *ngIf="showRegistrationLink" class="kannada-button kannada-button--primary event-showcase__action" routerLink="/events">
+        Book tickets
+        <span aria-hidden="true">→</span>
+      </a>
+      <p *ngIf="!showRegistrationLink" class="event-showcase__ticket-hint">
+        Choose your tickets below
+      </p>
+    </div>
+
+    <div *ngIf="event.posterImages.length; else noPosters" class="poster-gallery" role="group" aria-label="Event posters">
+      <figure
+        class="poster-item"
+        *ngFor="let image of event.posterImages"
+        [class.poster-item--single]="event.posterImages.length === 1">
+        <img [src]="image.src" [alt]="image.alt" loading="lazy" decoding="async">
+      </figure>
+    </div>
+  </div>
+</article>
+
+<ng-template #noPosters>
+  <p class="poster-empty" role="status">{{ event.posterMessage }}</p>
+</ng-template>

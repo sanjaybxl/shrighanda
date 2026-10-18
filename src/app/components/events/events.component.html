@@ -6,90 +6,10 @@
         <span class="shape-title"></span>
       </div>
   
-      <div class="card mb-4" style="background: linear-gradient(180deg, #f7420d 0%, #ffcc00 50%, #f98110 100%);">
-        <div class="card-header text-center">
-          <h2 class="mb-0" style="color: white;">{{ eventDetails.eventHeading }} - {{ eventDetails.year }}</h2>
-          <div class="card-title" style="color: white; font-size: medium; padding-top: 5px;">
-            Book your tickets below
-          </div>
-        </div>
-      </div>
-  
-      <div class="event-container">
-        <!-- Event images -->
-        <div class="event-image">
-          <img src="https://usercontent.one/wp/shrigandha.nl/wp-content/themes/shrighanda_new/angular-app/assets/events/2026/ugadi/cultural.png" alt="Event Image 1">
-        </div>
-        <div class="event-image">
-          <img src="https://usercontent.one/wp/shrigandha.nl/wp-content/themes/shrighanda_new/angular-app/assets/events/2026/ugadi/poster.png" alt="Event Image 2">
-        </div>
-        <div class="event-image">
-          <img src="https://usercontent.one/wp/shrigandha.nl/wp-content/themes/shrighanda_new/angular-app/assets/events/2026/ugadi/cultural1.png" alt="Event Image 3">
-        </div>
-      </div>
-  
-      
+      <app-event-poster
+        [event]="eventDetails"
+        [showRegistrationLink]="true">
+      </app-event-poster>
     </div>
   </section>
-  
-  <style>
-    /* Event container layout */
-    .event-container {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      border: 1px solid #e0e0e0;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-      padding: 10px;
-    }
-  
-    /* Event images */
-    .event-image {
-      flex: 1 1 30%;
-      overflow: hidden;
-      min-width: 250px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  
-    .event-image img {
-      width: 100%;
-      height: auto;
-      max-height: 400px; /* Controls the max visible height */
-      object-fit: contain;
-      border-radius: 5px;
-      transition: transform 0.3s ease;
-    }
-  
-    .event-image img:hover {
-      transform: scale(1.03);
-    }
-  
-  
-    /* Tablet screens */
-    @media (max-width: 992px) {
-      .event-image {
-        flex: 1 1 45%;
-      }
-    }
-  
-    /* Mobile screens */
-    @media (max-width: 600px) {
-      .event-image {
-        flex: 1 1 100%;
-      }
-      .event-image img {
-        max-height: 300px;
-      }
-    }
-  
-    section {
-      padding: 20px 0;
-    }
-  </style>
   

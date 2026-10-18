@@ -1,37 +1,143 @@
-.background-image-div {
-    position: relative;
-    z-index: 1;
-    /* Add styles for content */
+:host {
+  display: block;
 }
 
-.background-image-div::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('https://usercontent.one/wp/shrigandha.nl/wp-content/themes/shrighanda_new/angular-app/assets/nuddi.jpg') no-repeat center center;
-    background-size: cover;
-    opacity: 0.5; /* Adjust this value for desired opacity */
-    z-index: -1;
+.mission-section {
+  padding: 0 1rem clamp(3rem, 7vw, 6rem);
+  background: #fffdf7;
 }
 
-.background-image-div1 {
-    position: relative;
-    z-index: 1;
-    /* Add styles for content */
+.mission-container {
+  width: min(100%, 76rem);
+  margin: 0 auto;
 }
 
-.background-image-div1::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: url('https://usercontent.one/wp/shrigandha.nl/wp-content/themes/shrighanda_new/angular-app/assets/bendre_d.jpg') no-repeat center center;
-    background-size: cover;
-    opacity: 0.5; /* Adjust this value for desired opacity */
-    z-index: -1;
+.mission-card {
+  display: grid;
+  grid-template-columns: minmax(15rem, 0.75fr) minmax(0, 1.25fr);
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #eadfca;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1.5rem rgba(54, 27, 13, 0.1);
+}
+
+.mission-card__visual {
+  position: relative;
+  display: flex;
+  min-height: 25rem;
+  align-items: flex-end;
+  padding: 1.5rem;
+  background: #9c1420;
+}
+
+.mission-card__visual::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 0.45rem;
+  background: #ffd34f;
+  content: '';
+}
+
+.mission-card__visual img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  opacity: 0.82;
+}
+
+.mission-card__visual p {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  padding: 0.65rem 0.9rem;
+  color: #471116;
+  font-size: 1.05rem;
+  font-weight: 800;
+  background: #ffd34f;
+  border-radius: 0.4rem;
+}
+
+.mission-card__content {
+  align-self: center;
+  padding: clamp(1.5rem, 4vw, 3.25rem);
+  color: #4c4140;
+}
+
+.mission-card__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin: 0 0 0.75rem;
+  color: #a90e1a;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.mission-card__eyebrow span {
+  width: 1.75rem;
+  height: 0.2rem;
+  background: #ffc928;
+  border-radius: 999px;
+}
+
+.mission-card__content h2 {
+  margin: 0 0 1rem;
+  color: #78121b;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.mission-card__content p:not(.mission-card__eyebrow) {
+  margin: 0 0 1rem;
+  line-height: 1.8;
+}
+
+.mission-card__content .mission-card__lead {
+  padding: 1rem 1.1rem;
+  color: #57151a;
+  font-size: 1.1rem;
+  font-weight: 750;
+  background: #fff4cf;
+  border-left: 0.3rem solid #d51b2a;
+  border-radius: 0 0.45rem 0.45rem 0;
+}
+
+.mission-card__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.35rem;
+  padding: 0.75rem 1.1rem;
+  color: #fff;
+  font-weight: 750;
+  text-decoration: none;
+  background: #a90e1a;
+  border: 2px solid #a90e1a;
+  border-radius: 999px;
+}
+
+.mission-card__link:hover,
+.mission-card__link:focus-visible {
+  color: #4b1116;
+  background: #ffd34f;
+  border-color: #ffd34f;
+}
+
+@media (max-width: 767.98px) {
+  .mission-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .mission-card__visual {
+    min-height: 18rem;
+  }
 }

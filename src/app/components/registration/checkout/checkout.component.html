@@ -1,136 +1,136 @@
 <app-loading-modal [isLoading]="isLoading"></app-loading-modal>
 
-<div class="container mt-2">
-    <button class="back-button" *ngIf="cartItems.length > 0" onclick="window.history.back();">Go Back</button>
+<main class="checkout-page container">
+    <button class="checkout-back-button" *ngIf="cartItems.length > 0" onclick="window.history.back();">
+        <span aria-hidden="true">&larr;</span> Go Back
+    </button>
+
     <ng-template #emptyCart>
-        <div class="text-center mt-5">
-            <h3>Your cart is empty</h3>
+        <section class="checkout-empty" aria-labelledby="empty-cart-heading">
+            <span class="checkout-empty__mark" aria-hidden="true">&mdash;</span>
+            <h1 id="empty-cart-heading">Your cart is empty</h1>
             <p>Looks like you haven't added anything to your cart yet.</p>
-            <a class="btn btn-primary" routerLink="/events">Buy Tickets</a>
-        </div>
+            <a class="kannada-button kannada-button--primary" routerLink="/events">Browse Tickets</a>
+        </section>
     </ng-template>
-    <div class="row mt-2" *ngIf="cartItems.length > 0; else emptyCart">
-        
-        <!-- Right Column: Cart Summary -->
-        <div class="col-md-5 order-1 order-md-2 mb-4">
-            <h2 class="mb-4">Order Summary</h2>
-            <div class="card">
-                <div class="card-body">
-                    <div *ngFor="let item of cartItems">
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div style="text-align: start;">
-                                <h4 class="mb-0">{{ item.product.name }}</h4>
-                                <small>Quantity: {{ item.quantity }}</small>
-                            </div>
-                            <span class="text-muted">&euro;{{ item.product.price * item.quantity }}</span>
-                        </div>
-                        <hr />
-                    </div>
 
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h5>Total</h5>
-                        <h5>&euro;{{ calculateCartTotal() }}</h5>
-                    </div>
-                </div>
+    <div class="checkout-layout" *ngIf="cartItems.length > 0; else emptyCart">
+        <section class="checkout-form-column" aria-labelledby="checkout-heading">
+            <div class="checkout-section-heading">
+                <span class="checkout-section-heading__eyebrow">Almost there</span>
+                <h1 id="checkout-heading">Checkout</h1>
+                <p>Enter your details to complete your event registration.</p>
             </div>
-        </div>
 
-        <!-- Left Column: Checkout Form -->
-        <div class="col-md-7 order-2 order-md-1 pb-4">
-            <h2 class="mb-4">Checkout</h2>
-            <div class="card" style="text-align: left;">
-                <div class="card-body">
-
-                <!-- Form tag with ngModelGroup to track validation state -->
+            <div class="checkout-card checkout-form-card">
                 <form #checkoutForm="ngForm">
-                    <div class="row">
-                        <!-- First Name Field -->
-                        <div class="form-group col-md-6 mb-4">
-                            <label for="firstName">First Name</label>
-                            <input type="text" class="form-control form-control-sm" id="firstName"
-                                placeholder="Enter First Name" [(ngModel)]="firstName" name="firstName" required
-                                #firstNameField="ngModel" />
-                            <div *ngIf="firstNameField.invalid && firstNameField.touched" class="text-danger">
-                                First Name is required.
-                            </div>
-                        </div>
-
-                        <!-- Last Name Field -->
-                        <div class="form-group col-md-6 mb-4">
-                            <label for="lastName">Last Name</label>
-                            <input type="text" class="form-control form-control-sm" id="lastName"
-                                placeholder="Enter Last Name" [(ngModel)]="lastName" name="lastName" required
-                                #lastNameField="ngModel" />
-                            <div *ngIf="lastNameField.invalid && lastNameField.touched" class="text-danger">
-                                Last Name is required.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <!-- Email Field -->
-                        <div class="form-group col-md-6 mb-4">
-                            <label for="email">Email Address</label>
-                            <input type="email" class="form-control form-control-sm" id="email"
-                                placeholder="Enter Email" [(ngModel)]="email" name="email" required email
-                                #emailField="ngModel" />
-                            <div *ngIf="emailField.invalid && emailField.touched" class="text-danger">
-                                Valid Email is required.
-                            </div>
-                        </div>
-
-                        <!-- Phone Number Field -->
-                        <div class="form-group col-md-6 mb-4">
-                            <label for="phoneNumber">Phone Number</label>
-                            <input type="tel" class="form-control form-control-sm" id="phoneNumber"
-                                placeholder="Enter Phone Number" [(ngModel)]="phoneNumber" name="phoneNumber" required
-                                #phoneField="ngModel" [pattern]="dutchPhonePattern" />
-                            <div *ngIf="phoneField.invalid && phoneField.touched" class="text-danger">
-                                Please enter a valid Dutch phone number (e.g., 06 12345678 or +31 6 12345678).
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <!-- City Field -->
-                        <div class="form-group col-md-6 mb-4">
-                            <label for="city">City</label>
-                            <input type="text" class="form-control form-control-sm" id="city" placeholder="Enter City"
-                                [(ngModel)]="city" name="city" required #cityField="ngModel" />
-                            <div *ngIf="cityField.invalid && cityField.touched" class="text-danger">
-                                City is required.
-                            </div>
-                        </div>
-
-                        <!-- Commute Field (Select) -->
-                        <div class="form-group col-md-6 mb-4">
-                            <label>Commute</label>
-                            <div class="d-flex">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" id="commutePublic" value="pubilc"
-                                        [(ngModel)]="commute" name="commute" required #commuteField="ngModel">
-                                    <label class="form-check-label" for="commutePublic">By Public Transport</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" id="commuteOwn" value="own"
-                                        [(ngModel)]="commute" name="commute" required #commuteField="ngModel">
-                                    <label class="form-check-label" for="commuteOwn">By Car</label>
-                                </div>
-                                <div *ngIf="commuteField.invalid && commuteField.touched" class="text-danger">
-                                    Commute method is required.
+                    <section class="checkout-form-section" aria-labelledby="contact-heading">
+                        <h2 id="contact-heading" class="checkout-form-section__heading">
+                            <span class="checkout-step">1</span>
+                            Your details
+                        </h2>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label for="firstName">First Name</label>
+                                <input type="text" class="form-control" id="firstName"
+                                    placeholder="Enter first name" [(ngModel)]="firstName" name="firstName" required
+                                    #firstNameField="ngModel" />
+                                <div *ngIf="firstNameField.invalid && firstNameField.touched" class="checkout-field-error">
+                                    First name is required.
                                 </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="row" *ngIf="calculateCartTotal() > 0">
-                        <!-- Disable button if form is invalid -->
-                        <div class="form-group col-md-6 mb-4">
-                            <label>iDEAL Payment</label>
-                            <div id="ideal-bank-element"></div>
+                            <div class="form-group col-md-6">
+                                <label for="lastName">Last Name</label>
+                                <input type="text" class="form-control" id="lastName"
+                                    placeholder="Enter last name" [(ngModel)]="lastName" name="lastName" required
+                                    #lastNameField="ngModel" />
+                                <div *ngIf="lastNameField.invalid && lastNameField.touched" class="checkout-field-error">
+                                    Last name is required.
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="email">Email Address</label>
+                                <input type="email" class="form-control" id="email"
+                                    placeholder="you@example.com" [(ngModel)]="email" name="email" required email
+                                    #emailField="ngModel" />
+                                <div *ngIf="emailField.invalid && emailField.touched" class="checkout-field-error">
+                                    Valid email is required.
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="phoneNumber">Phone Number</label>
+                                <input type="tel" class="form-control" id="phoneNumber"
+                                    placeholder="06 12345678" [(ngModel)]="phoneNumber" name="phoneNumber" required
+                                    #phoneField="ngModel" [pattern]="dutchPhonePattern" />
+                                <div *ngIf="phoneField.invalid && phoneField.touched" class="checkout-field-error">
+                                    Please enter a valid Dutch phone number (e.g., 06 12345678 or +31 6 12345678).
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label for="city">City</label>
+                                <input type="text" class="form-control" id="city"
+                                    placeholder="Enter city" [(ngModel)]="city" name="city" required
+                                    #cityField="ngModel" />
+                                <div *ngIf="cityField.invalid && cityField.touched" class="checkout-field-error">
+                                    City is required.
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <fieldset class="checkout-commute">
+                                    <legend>How will you travel?</legend>
+                                    <div class="checkout-commute__options">
+                                        <div class="checkout-commute__option">
+                                            <label for="commutePublic" [class.is-selected]="commute === 'pubilc'">
+                                                <input type="radio" id="commutePublic" value="pubilc"
+                                                    [(ngModel)]="commute" name="commute" required #commuteField="ngModel">
+                                                <span class="checkout-commute__icon" aria-hidden="true">
+                                                    <i class="fas fa-bus"></i>
+                                                </span>
+                                                <span class="checkout-commute__text">
+                                                    <strong>Public transport</strong>
+                                                    <small>Bus or train</small>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="checkout-commute__option">
+                                            <label for="commuteOwn" [class.is-selected]="commute === 'own'">
+                                                <input type="radio" id="commuteOwn" value="own"
+                                                    [(ngModel)]="commute" name="commute" required #commuteField="ngModel">
+                                                <span class="checkout-commute__icon" aria-hidden="true">
+                                                    <i class="fas fa-car"></i>
+                                                </span>
+                                                <span class="checkout-commute__text">
+                                                    <strong>By car</strong>
+                                                    <small>Driving to the event</small>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="commuteField.invalid && commuteField.touched" class="checkout-field-error">
+                                        Commute method is required.
+                                    </div>
+                                </fieldset>
+                            </div>
                         </div>
-                    </div>
-                    <button type="button" class="btn btn-primary btn-block mt-4 mb-4" *ngIf="calculateCartTotal() !== 0"
+                    </section>
+
+                    <section class="checkout-payment-section" *ngIf="calculateCartTotal() > 0"
+                        aria-labelledby="payment-heading">
+                        <h2 id="payment-heading" class="checkout-form-section__heading">
+                            <span class="checkout-step">2</span>
+                            Payment
+                        </h2>
+                        <label class="checkout-payment-label">Choose your bank with iDEAL</label>
+                        <div id="ideal-bank-element" class="checkout-payment-element"></div>
+                    </section>
+
+                    <button type="button" class="kannada-button kannada-button--primary checkout-submit"
+                        *ngIf="calculateCartTotal() !== 0"
                         [disabled]="checkoutForm.invalid || !paymentModeValid || isLoading || calculateCartTotal() === 0"
                         (click)="handleSubmit($event)">
                         <span *ngIf="isLoading">Processing...</span>
@@ -138,19 +138,41 @@
                         <span *ngIf="!isLoading && calculateCartTotal() == 0">Register</span>
                     </button>
 
-                    <button type="button" class="btn btn-primary btn-block mt-4 mb-4" *ngIf="calculateCartTotal() === 0"
+                    <button type="button" class="kannada-button kannada-button--primary checkout-submit"
+                        *ngIf="calculateCartTotal() === 0"
                         [disabled]="checkoutForm.invalid || isLoading" (click)="handleSubmit($event)">
                         <span *ngIf="isLoading">Processing...</span>
                         <span *ngIf="!isLoading">Register</span>
                     </button>
 
-                    <div *ngIf="errorMessage" class="error-message">
+                    <div *ngIf="errorMessage" class="checkout-error" role="alert">
                         {{ errorMessage }}
                     </div>
                 </form>
-                </div>  
             </div>
+        </section>
 
-        </div>
+        <aside class="checkout-summary-column" aria-labelledby="order-summary-heading">
+            <div class="checkout-summary">
+                <div class="checkout-summary__header">
+                    <span class="checkout-section-heading__eyebrow">Your registration</span>
+                    <h2 id="order-summary-heading">Order Summary</h2>
+                </div>
+                <div class="checkout-summary__items">
+                    <div class="checkout-summary__item" *ngFor="let item of cartItems">
+                        <div class="checkout-summary__item-details">
+                            <h3>{{ item.product.name }}</h3>
+                            <span>Quantity: {{ item.quantity }}</span>
+                        </div>
+                        <span class="checkout-summary__price">&euro;{{ item.product.price * item.quantity }}</span>
+                    </div>
+                </div>
+                <div class="checkout-summary__total">
+                    <span>Total</span>
+                    <strong>&euro;{{ calculateCartTotal() }}</strong>
+                </div>
+                <p class="checkout-summary__note">Your tickets will be linked to the contact details provided.</p>
+            </div>
+        </aside>
     </div>
-</div>
+</main>
