@@ -39,27 +39,16 @@
 .event-hero__content {
   width: min(100% - 2rem, 76rem);
   margin: 0 auto;
-  padding: 3rem 0;
-}
-
-.event-hero__eyebrow {
-  display: inline-block;
-  margin: 0 0 1.25rem;
-  padding: 0.45rem 0.8rem;
-  color: #411014;
-  font-size: 0.85rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  background: #ffd34f;
-  border-radius: 999px;
+  padding: 4.5rem 0 3rem;
 }
 
 .event-hero__date {
-  margin: 0 0 0.65rem;
+  margin: 0;
   color: #ffe08a;
   font-size: clamp(1rem, 2vw, 1.2rem);
   font-weight: 700;
   letter-spacing: 0.04em;
+  line-height: 1.1;
 }
 
 .event-hero__title {
@@ -74,11 +63,13 @@
 .event-hero__title-text {
   display: block;
   white-space: nowrap;
+  animation: title-fade-in 800ms ease-out both;
 }
 
 .event-hero__year {
   display: block;
   color: #ffd34f;
+  animation: title-fade-in 800ms ease-out 180ms both;
 }
 
 .event-hero__description {
@@ -120,6 +111,16 @@
   min-height: 3rem;
 }
 
+.event-hero__tagline {
+  position: absolute;
+  right: max(1rem, calc((100% - 76rem) / 2));
+  bottom: 1rem;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+}
+
 .event-hero__flag-stripe {
   position: absolute;
   right: 0;
@@ -127,6 +128,16 @@
   left: 0;
   height: 0.55rem;
   background: linear-gradient(90deg, #c41424 0 50%, #ffd34f 50% 100%);
+}
+
+@keyframes title-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 @media (max-width: 767.98px) {
@@ -142,7 +153,7 @@
 
   .event-hero__content {
     width: min(100% - 2rem, 42rem);
-    padding: 2.25rem 0 2rem;
+    padding: 3.5rem 0 2rem;
   }
 
   .event-hero__title {
@@ -162,5 +173,12 @@
 
   .event-hero__button {
     width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .event-hero__title-text,
+  .event-hero__year {
+    animation: none;
   }
 }
