@@ -6,28 +6,46 @@
 
   <div class="event-showcase__body">
     <div class="event-showcase__details">
+      <span class="event-showcase__invitation">You’re invited</span>
       <p class="event-showcase__intro">Celebrate Kannada culture with our community.</p>
 
       <div class="event-showcase__detail">
-        <span class="event-showcase__label">Date</span>
-        <span>{{ event.celebrationMonth }} {{ event.celebrationDay }}, {{ event.year }}</span>
+        <span class="event-showcase__detail-icon" aria-hidden="true">
+          <i class="far fa-calendar-alt"></i>
+        </span>
+        <div>
+          <span class="event-showcase__label">Date</span>
+          <span class="event-showcase__value">{{ event.celebrationMonth }} {{ event.celebrationDay }}, {{ event.year }}</span>
+        </div>
       </div>
 
       <div class="event-showcase__detail">
-        <span class="event-showcase__label">Venue</span>
-        <a [href]="event.venueMapUrl" target="_blank" rel="noopener noreferrer">
-          {{ event.venueAddress }}
-          <span class="event-showcase__map-hint">View map</span>
-        </a>
+        <span class="event-showcase__detail-icon" aria-hidden="true">
+          <i class="fas fa-map-marker-alt"></i>
+        </span>
+        <div>
+          <span class="event-showcase__label">Venue</span>
+          <a [href]="event.venueMapUrl" target="_blank" rel="noopener noreferrer">
+            {{ event.venueAddress }}
+            <span class="event-showcase__map-hint">View map <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></span>
+          </a>
+        </div>
       </div>
 
       <a *ngIf="showRegistrationLink" class="kannada-button kannada-button--primary event-showcase__action" routerLink="/events">
         Book tickets
-        <span aria-hidden="true">→</span>
+        <span aria-hidden="true"><i class="fas fa-arrow-right"></i></span>
       </a>
       <p *ngIf="!showRegistrationLink" class="event-showcase__ticket-hint">
         Choose your tickets below
       </p>
+
+      <section class="event-showcase__sponsors" aria-label="Event sponsors">
+        <span class="event-showcase__sponsors-label">Proudly supported by</span>
+        <div class="event-showcase__sponsor-logos">
+          <img *ngFor="let logo of sponsorLogos" [src]="logo" alt="Sponsor logo" loading="lazy">
+        </div>
+      </section>
     </div>
 
     <div *ngIf="event.posterImages.length; else noPosters" class="poster-gallery" role="group" aria-label="Event posters">

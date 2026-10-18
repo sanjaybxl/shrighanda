@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { EventDetails } from '../event-details';
+import { sponsorLogos } from '../sponsor-logos';
 
 @Component({
   selector: 'app-event-poster',
@@ -9,4 +10,5 @@ import { EventDetails } from '../event-details';
 export class EventPosterComponent {
   @Input() event!: EventDetails;
   @Input() showRegistrationLink = false;
+  readonly sponsorLogos = sponsorLogos;
 }

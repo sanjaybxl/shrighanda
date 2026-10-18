@@ -89,7 +89,7 @@ header {
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  min-height: 5.25rem;
+  min-height: 4.25rem;
   padding: 0.65rem clamp(1rem, 4vw, 3rem);
   background: #fffdf7;
   box-shadow: 0 0.2rem 1rem rgba(57, 21, 17, 0.12);
@@ -103,23 +103,6 @@ header {
   min-width: 0;
   color: #491116;
   text-decoration: none;
-}
-
-.brand__logo {
-  display: block;
-  width: 3.6rem;
-  height: 3.6rem;
-  object-fit: contain;
-}
-
-.brand__title {
-  min-width: 0;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  font-size: clamp(1.05rem, 1.8vw, 1.45rem);
-  font-weight: 800;
-  line-height: 1.2;
 }
 
 .menu {
@@ -182,12 +165,7 @@ header {
   }
 
   header {
-    min-height: 4.5rem;
-  }
-
-  .brand__logo {
-    width: 3rem;
-    height: 3rem;
+    min-height: 3.9rem;
   }
 
   .menu {
@@ -216,17 +194,8 @@ header {
 
   header {
     justify-content: space-between;
-    min-height: 4.25rem;
+    min-height: 3.75rem;
     padding: 0.55rem 1rem;
-  }
-
-  .brand__logo {
-    width: 2.75rem;
-    height: 2.75rem;
-  }
-
-  .brand__title {
-    font-size: clamp(0.78rem, 2.8vw, 1rem);
   }
 
   .menu-toggle {
@@ -288,17 +257,8 @@ header {
     column-gap: 0.5rem;
   }
 
-  .brand__title {
-    font-size: clamp(0.68rem, 3.2vw, 0.82rem);
-  }
-
   .brand {
     gap: 0.45rem;
-  }
-
-  .brand__logo {
-    width: 2.3rem;
-    height: 2.3rem;
   }
 }
 

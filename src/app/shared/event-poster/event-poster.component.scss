@@ -64,24 +64,65 @@
 }
 
 .event-showcase__details {
-  padding: clamp(0.5rem, 2vw, 1.25rem);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(1.25rem, 2.5vw, 2rem);
+  background:
+    linear-gradient(145deg, rgba(255, 211, 79, 0.14), transparent 48%),
+    #fff;
+  border: 1px solid #eadfca;
+  border-top: 0.3rem solid #a90e1a;
+  border-radius: 0.8rem;
+  box-shadow: 0 0.25rem 0.85rem rgba(54, 27, 13, 0.07);
+}
+
+.event-showcase__invitation {
+  margin-bottom: 0.55rem;
+  color: #a90e1a;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 .event-showcase__intro {
-  margin: 0 0 1.5rem;
-  color: #555;
-  font-size: clamp(1.05rem, 2vw, 1.25rem);
-  line-height: 1.55;
+  margin: 0 0 1.25rem;
+  color: #3e3030;
+  font-size: clamp(1.2rem, 2vw, 1.55rem);
+  font-weight: 750;
+  line-height: 1.35;
 }
 
 .event-showcase__detail {
-  display: grid;
-  gap: 0.25rem;
-  margin: 0 0 1.25rem;
-  padding-left: 0.9rem;
-  border-left: 0.25rem solid #ffc928;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  width: 100%;
+  margin: 0 0 0.75rem;
+  padding: 0.8rem;
+  background: #fffdf7;
+  border: 1px solid #eee5d8;
+  border-radius: 0.55rem;
   color: #28231f;
   line-height: 1.5;
+}
+
+.event-showcase__detail-icon {
+  display: grid;
+  flex: 0 0 2.6rem;
+  width: 2.6rem;
+  height: 2.6rem;
+  place-items: center;
+  color: #78121b;
+  background: #fff0bd;
+  border-radius: 50%;
+}
+
+.event-showcase__detail > div {
+  display: grid;
+  gap: 0.15rem;
 }
 
 .event-showcase__label {
@@ -92,6 +133,10 @@
   text-transform: uppercase;
 }
 
+.event-showcase__value {
+  font-weight: 700;
+}
+
 .event-showcase__detail a {
   color: #39261e;
   font-weight: 600;
@@ -100,21 +145,54 @@
 }
 
 .event-showcase__map-hint {
-  display: inline-block;
-  margin-left: 0.35rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-left: 0.25rem;
   color: #a90e1a;
   font-size: 0.85rem;
   font-weight: 600;
 }
 
 .event-showcase__action {
-  margin-top: 0.35rem;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 0.5rem;
 }
 
 .event-showcase__ticket-hint {
   margin: 1rem 0 0;
   color: #8d111c;
   font-weight: 700;
+}
+
+.event-showcase__sponsors {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid #eadfca;
+}
+
+.event-showcase__sponsors-label {
+  display: block;
+  margin-bottom: 0.65rem;
+  color: #716562;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.event-showcase__sponsor-logos {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.event-showcase__sponsor-logos img {
+  width: calc((100% - 1rem) / 3);
+  height: clamp(3.5rem, 5vw, 4.75rem);
+  object-fit: contain;
 }
 
 .poster-gallery {

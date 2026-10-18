@@ -1,82 +1,138 @@
+:host {
+  display: block;
+}
+
 .sponsor-section {
-    text-align: center;
-    padding: 3rem 1rem;
-    background: #fafafa;
+  padding: 1rem 1rem clamp(2.5rem, 5vw, 4rem);
+  text-align: center;
+  background: var(--kannada-paper);
+}
+
+.sponsor-heading {
+  margin: 0 auto 2rem;
+}
+
+.sponsor-heading__eyebrow {
+  display: inline-block;
+  margin-bottom: 0.65rem;
+  padding: 0.4rem 0.8rem;
+  color: #68131a;
+  background: #fff0bd;
+  border: 1px solid var(--kannada-border);
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.sponsor-title {
+  margin: 0;
+  color: var(--kannada-red-dark);
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.sponsor-heading__description {
+  margin: 0.6rem auto 0.9rem;
+  color: #716562;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+
+.sponsor-heading__accent {
+  display: block;
+  width: 3.5rem;
+  height: 0.22rem;
+  margin: 0 auto;
+  background: linear-gradient(90deg, var(--kannada-red) 0 50%, var(--kannada-yellow) 50% 100%);
+  border-radius: 999px;
+}
+
+.logo-slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: min(100%, 76rem);
+  min-height: 10rem;
+  margin: 0 auto;
+  padding: 1.25rem;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--kannada-border);
+  border-top: 0.3rem solid var(--kannada-red);
+  border-radius: 0.75rem;
+  box-shadow: 0 0.3rem 1rem rgba(54, 27, 13, 0.07);
+}
+
+.logo-track {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: max-content;
+  animation: scroll-right var(--scroll-speed, 30s) linear infinite;
+}
+
+.logo-card {
+  display: grid;
+  flex: 0 0 13rem;
+  height: 7rem;
+  place-items: center;
+  padding: 0.9rem 1.25rem;
+  background: #fffdf7;
+  border: 1px solid #eee5d8;
+  border-radius: 0.55rem;
+}
+
+.logo-card img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 180ms ease;
+}
+
+.logo-card:hover img {
+  transform: scale(1.05);
+}
+
+.logo-static {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  width: 100%;
+}
+
+@keyframes scroll-right {
+  from {
+    transform: translateX(-50%);
   }
-  
-  .sponsor-title {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 1.5rem;
-    text-transform: uppercase;
-    letter-spacing: 2px;
+  to {
+    transform: translateX(0);
   }
-  
-  /* The slider container */
-  .logo-slider {
-    overflow: hidden;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    background: white;
-    border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
-    position: relative;
-    padding: 10px 0;
-  }
-  
-  /* Scrolling section */
+}
+
+@media (prefers-reduced-motion: reduce) {
   .logo-track {
-    display: flex;
-    animation: scroll-right var(--scroll-speed, 30s) linear infinite;
+    animation: none;
   }
-  
-  .logo-track img,
-  .logo-static img {
-    height: auto;
-    max-height: 160px; /* smaller & proportional */
-    width: auto;
-    max-width: 220px; /* caps overly wide logos */
-    margin: 0 20px;
-    object-fit: contain;
-    transition: transform 0.3s ease;
+
+  .logo-card img {
+    transition: none;
   }
-  
-  .logo-track img:hover,
-  .logo-static img:hover {
-    transform: scale(1.05);
+}
+
+@media (max-width: 767.98px) {
+  .logo-slider {
+    min-height: 8rem;
+    padding: 0.85rem;
   }
-  
-  /* Static layout for 1–3 logos */
-  .logo-static {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
+
+  .logo-card {
+    flex-basis: 10rem;
+    height: 5.5rem;
+    padding: 0.7rem;
   }
-  
-  /* Animation for scrolling */
-  @keyframes scroll-right {
-    0% {
-      transform: translateX(-50%);
-    }
-    100% {
-      transform: translateX(0);
-    }
-  }
-  
-  /* Responsive tuning */
-  @media (max-width: 768px) {
-    .sponsor-title {
-      font-size: 1.5rem;
-    }
-  
-    .logo-track img,
-    .logo-static img {
-      max-height: 90px;
-      max-width: 180px;
-      margin: 0 10px;
-    }
-  }
-  
+}

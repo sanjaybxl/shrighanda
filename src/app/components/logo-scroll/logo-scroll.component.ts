@@ -1,4 +1,5 @@
 import { Component, HostListener, OnInit, Renderer2, ElementRef } from '@angular/core';
+import { sponsorLogos } from '../../shared/sponsor-logos';
 
 @Component({
   selector: 'app-logo-scroll',
@@ -6,18 +7,7 @@ import { Component, HostListener, OnInit, Renderer2, ElementRef } from '@angular
   styleUrls: ['./logo-scroll.component.scss']
 })
 export class LogoScrollComponent implements OnInit {
-  logos: string[] = [
-    'https://usercontent.one/wp/shrigandha.nl/wp-content/themes/shrighanda_new/angular-app/assets/events/2026/logos/logo1.png',
-    'https://usercontent.one/wp/shrigandha.nl/wp-content/themes/shrighanda_new/angular-app/assets/events/2026/logos/logo2.png',
-    'https://usercontent.one/wp/shrigandha.nl/wp-content/themes/shrighanda_new/angular-app/assets/events/2026/logos/logo3.png',
-    'https://usercontent.one/wp/shrigandha.nl/wp-content/themes/shrighanda_new/angular-app/assets/events/2026/logos/logo4.png',
-    'https://usercontent.one/wp/shrigandha.nl/wp-content/themes/shrighanda_new/angular-app/assets/events/2026/logos/logo5.png',
-    'https://usercontent.one/wp/shrigandha.nl/wp-content/themes/shrighanda_new/angular-app/assets/events/2026/logos/logo6.png',
-    'https://usercontent.one/wp/shrigandha.nl/wp-content/themes/shrighanda_new/angular-app/assets/events/2026/logos/logo7.png',
-    'https://usercontent.one/wp/shrigandha.nl/wp-content/themes/shrighanda_new/angular-app/assets/events/2026/logos/logo8.png',
-    'https://usercontent.one/wp/shrigandha.nl/wp-content/themes/shrighanda_new/angular-app/assets/events/2026/logos/logo9.png'
-    // add more as needed
-  ];
+  logos: string[] = sponsorLogos;
 
   duplicatedLogos: string[] = [];
 

@@ -1,3 +1,49 @@
 :host {
   display: block;
 }
+
+.events-section {
+  padding: clamp(2.5rem, 5vw, 4rem) 1rem 1rem;
+}
+
+.events-title {
+  margin-bottom: 2rem;
+}
+
+.events-title__eyebrow {
+  display: inline-block;
+  margin-bottom: 0.85rem;
+  padding: 0.45rem 0.85rem;
+  color: #68131a;
+  background: #fff0bd;
+  border: 1px solid #eadfca;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.events-title__heading {
+  margin: 0;
+  color: #78121b;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.events-title__subtitle {
+  max-width: 38rem;
+  margin: 0.75rem auto 1rem;
+  color: #716562;
+  font-size: clamp(1rem, 2vw, 1.1rem);
+  line-height: 1.6;
+}
+
+.events-title__accent {
+  display: block;
+  width: 4rem;
+  height: 0.25rem;
+  margin: 0 auto;
+  background: linear-gradient(90deg, #a90e1a 0 50%, #ffd34f 50% 100%);
+  border-radius: 999px;
+}

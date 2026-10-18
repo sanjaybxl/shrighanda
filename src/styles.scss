@@ -131,6 +131,71 @@ button.kannada-button.ticket-card__add-button:disabled:not(.ticket-card__add-but
     cursor: not-allowed;
 }
 
+app-header header .brand__logo {
+    position: absolute;
+    z-index: 2;
+    top: 100%;
+    left: clamp(1rem, 4vw, 3rem);
+    width: 5rem;
+    height: 5rem;
+    padding: 0.25rem;
+    background: #fffdf7;
+    border: 0.2rem solid #ffd34f;
+    border-radius: 50%;
+    box-shadow: 0 0.3rem 1rem rgba(49, 20, 16, 0.22);
+    transform: translateY(-50%);
+}
+
+app-header header .brand__title {
+    position: absolute;
+    z-index: 3;
+    top: 100%;
+    left: calc(clamp(1rem, 4vw, 3rem) + 5.5rem);
+    padding: 0.45rem 0.95rem;
+    color: #fff;
+    background: #a90e1a;
+    border: 1px solid #ffd34f;
+    border-radius: 999px;
+    box-shadow: 0 0.25rem 0.75rem rgba(49, 20, 16, 0.2);
+    white-space: nowrap;
+    font-size: clamp(1.2rem, 2vw, 1.7rem);
+    font-weight: 800;
+    line-height: 1.2;
+    transform: translateY(-50%);
+}
+
+@media (max-width: 960px) {
+    app-header header .brand__logo {
+        left: 1rem;
+        width: 4.5rem;
+        height: 4.5rem;
+    }
+
+    app-header header .brand__title {
+        left: 6rem;
+        font-size: clamp(1rem, 2.4vw, 1.3rem);
+    }
+}
+
+@media (max-width: 760px) {
+    app-header header .brand__logo {
+        width: 3.75rem;
+        height: 3.75rem;
+    }
+
+    app-header header .brand__title {
+        left: 5.25rem;
+        padding: 0.35rem 0.7rem;
+        font-size: clamp(0.72rem, 3.4vw, 1rem);
+    }
+}
+
+@media (max-width: 420px) {
+    app-header header .brand__title {
+        font-size: 0.7rem;
+    }
+}
+
 @media (prefers-reduced-motion: reduce) {
     .kannada-button {
         transition: none;

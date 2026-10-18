@@ -39,7 +39,7 @@
 .event-hero__content {
   width: min(100% - 2rem, 76rem);
   margin: 0 auto;
-  padding: clamp(1.5rem, 4vw, 3rem) 0 3rem;
+  padding: 3rem 0;
 }
 
 .event-hero__eyebrow {
@@ -142,7 +142,7 @@
 
   .event-hero__content {
     width: min(100% - 2rem, 42rem);
-    padding: 1.25rem 0 2rem;
+    padding: 2.25rem 0 2rem;
   }
 
   .event-hero__title {
